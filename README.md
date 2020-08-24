@@ -1,6 +1,6 @@
-# orderService
+# eventbridge-sam-sample
 
-This is a sample template for orderService - Below is a brief explanation of what we have generated for you:
+This is a sample template for eventbridge-sam-sample - Below is a brief explanation of what we have generated for you:
 
 ```bash
 .
@@ -85,7 +85,7 @@ Next, the following command will create a Cloudformation Stack and deploy your S
 ```bash
 sam deploy \
     --template-file packaged.yaml \
-    --stack-name orderservice \
+    --stack-name eventbridge-sam-sample \
     --capabilities CAPABILITY_IAM
 ```
 
@@ -95,7 +95,7 @@ After deployment is complete you can run the following command to retrieve the A
 
 ```bash
 aws cloudformation describe-stacks \
-    --stack-name orderservice \
+    --stack-name eventbridge-sam-sample \
     --query 'Stacks[].Outputs[?OutputKey==`HelloWorldApi`]' \
     --output table
 ``` 
@@ -107,7 +107,7 @@ To simplify troubleshooting, SAM CLI has a command called sam logs. sam logs let
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-sam logs -n HelloWorldFunction --stack-name orderservice --tail
+sam logs -n HelloWorldFunction --stack-name eventbridge-sam-sample --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
@@ -127,7 +127,7 @@ python -m pytest tests/ -v
 In order to delete our Serverless Application recently deployed you can use the following AWS CLI Command:
 
 ```bash
-aws cloudformation delete-stack --stack-name orderservice
+aws cloudformation delete-stack --stack-name eventbridge-sam-sample
 ```
 
 ## Bringing to the next level
@@ -195,16 +195,26 @@ sam package \
 # Deploy SAM template as a CloudFormation stack
 sam deploy \
     --template-file packaged.yaml \
-    --stack-name orderservice \
+    --stack-name eventbridge-sam-sample \
     --capabilities CAPABILITY_IAM
 
 # Describe Output section of CloudFormation stack previously created
 aws cloudformation describe-stacks \
-    --stack-name orderservice \
+    --stack-name eventbridge-sam-sample \
     --query 'Stacks[].Outputs[?OutputKey==`HelloWorldApi`]' \
     --output table
 
 # Tail Lambda function Logs using Logical name defined in SAM Template
-sam logs -n HelloWorldFunction --stack-name orderservice --tail
+sam logs -n HelloWorldFunction --stack-name eventbridge-sam-sample --tail
 ```
-
+### Creating, Activating & Deactivating Python Env
+```
+which python3
+virtualenv -p /usr/local/bin/python3 venv
+source venv/bin/activate
+deactivate
+```
+### Invoking a Lambda function
+```
+aws lambda invoke --function-name FUNCTION_NAME out --log-type Tail --query LogResult --output text | base64 -d
+```
