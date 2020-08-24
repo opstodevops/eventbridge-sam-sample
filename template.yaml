@@ -10,6 +10,9 @@ Resources:
   orderServiceFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: orderService
+      Description: This is Order Service function
+      # Role: 
       CodeUri: orderService/
       Handler: app.lambda_handler
       Runtime: python3.8
@@ -23,6 +26,9 @@ Resources:
   invoiceServiceFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: invoiceService
+      Description: This is Invoice Service function
+      # Role: 
       CodeUri: invoiceService/
       Handler: app.lambda_handler
       Runtime: python3.8
@@ -58,13 +64,19 @@ Resources:
           - "EventRule"
           - "Arn"
 
-# Outputs:
-#   HelloWorldApi:
-#     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-#     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-#   HelloWorldFunction:
-#     Description: "Hello World Lambda Function ARN"
-#     Value: !GetAtt HelloWorldFunction.Arn
-#   HelloWorldFunctionIamRole:
-#     Description: "Implicit IAM Role created for Hello World function"
-#     Value: !GetAtt HelloWorldFunctionRole.Arn
+Outputs:
+  # HelloWorldApi:
+  #   Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+  #   Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  orderServiceFunction:
+    Description: "orderService Lambda Function ARN"
+    Value: !GetAtt orderServiceFunction.Arn
+  orderServiceFunctionIamRole:
+    Description: "Implicit IAM Role created for orderService function"
+    Value: !GetAtt orderServiceFunctionRole.Arn
+  invoiceServiceFunction:
+    Description: "invoiceService Lambda Function ARN"
+    Value: !GetAtt invoiceServiceFunction.Arn
+  invoiceServiceFunctionIamRole:
+    Description: "Implicit IAM Role created for invoiceService function"
+    Value: !GetAtt invoiceServiceFunctionRole.Arn

@@ -2,14 +2,9 @@ import json
 import logging
 import boto3
 
+import logging
 logger = logging.getLogger()
-handler = logging.StreamHandler()
-formatter = logging.Formatter(
-        '%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-logger.setLevel(logging.DEBUG)
-
+logger.setLevel(logging.INFO)
 def lambda_handler(event, context):
     event_bridge = boto3.client('events')
     
@@ -26,7 +21,7 @@ def lambda_handler(event, context):
         ]
     )
     
-    logger.debug(response)
+    logger.info(response)
     
     return {
         "statusCode": 200,
