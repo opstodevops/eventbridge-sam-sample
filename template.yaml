@@ -7,10 +7,10 @@ Globals:
     Timeout: 3
 
 Resources:
-  EventBridge-SAM-SampleFunction:
+  orderServiceFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: EventBridge-SAM-Sample/
+      CodeUri: orderService/
       Handler: app.lambda_handler
       Runtime: python3.8
       Policies:
