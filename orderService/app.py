@@ -1,10 +1,9 @@
 import json
-import logging
 import boto3
-
 import logging
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+
+# logger = logging.getLogger()
+# logger.setLevel(logging.DEBUG)
 def lambda_handler(event, context):
     event_bridge = boto3.client('events')
     
@@ -21,7 +20,8 @@ def lambda_handler(event, context):
         ]
     )
     
-    logger.info(response)
+    # logger.debug(response)
+    print(response)
     
     return {
         "statusCode": 200,
